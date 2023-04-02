@@ -29,7 +29,7 @@ public class RegisterPage {
     protected static By password = By.id("customer.password");
     protected static By confirmPassword = By.id("repeatedPassword");
 
-    protected static By btnRegister;
+    protected static By btnRegister = By.xpath("//*[@id=\"customerForm\"]/table/tbody/tr[13]/td[2]/input");
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
@@ -43,15 +43,81 @@ public class RegisterPage {
     }
 
 
-
-    public String checkMsg() {
+    public String checkMsg(By locator) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"rightPanel\"]/h1")));
-        WebElement msg = driver.findElement(By.xpath("//*[@id=\"rightPanel\"]/h1"));
-        String text = msg.getText();
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        WebElement msgResult = driver.findElement(locator);
+        String text = msgResult.getText();
 
         return text;
     }
 
+
+    public void completeForm(
+            String firstNameIn,
+            String lastNameIn,
+            String addressIn,
+            String cityIn,
+            String stateIn,
+            String zipCodeIn,
+            String phoneIn,
+            String ssnIn,
+            String usernameIn,
+            String passwordIn
+    ) {
+
+        WebElement nameAux = driver.findElement(firstName);
+        nameAux.clear();
+        nameAux.sendKeys(firstNameIn);
+
+        WebElement lastnameAux = driver.findElement(lastName);
+        lastnameAux.clear();
+        lastnameAux.sendKeys(lastNameIn);
+
+        WebElement addressAux = driver.findElement(address);
+        addressAux.clear();
+        addressAux.sendKeys(addressIn);
+
+        WebElement cityAux = driver.findElement(city);
+        cityAux.clear();
+        cityAux.sendKeys(cityIn);
+
+        WebElement stateAux = driver.findElement(state);
+        stateAux.clear();
+        stateAux.sendKeys(stateIn);
+
+        WebElement zipCodeAux = driver.findElement(zipCode);
+        zipCodeAux.clear();
+        zipCodeAux.sendKeys(zipCodeIn);
+
+        WebElement phoneAux = driver.findElement(phone);
+        phoneAux.clear();
+        phoneAux.sendKeys(phoneIn);
+
+        WebElement ssnAux = driver.findElement(ssn);
+        ssnAux.clear();
+        ssnAux.sendKeys(ssnIn);
+
+        WebElement usernameAux = driver.findElement(username);
+        usernameAux.clear();
+        usernameAux.sendKeys(usernameIn);
+
+        WebElement passwordAux = driver.findElement(password);
+        passwordAux.clear();
+        passwordAux.sendKeys(passwordIn);
+
+        WebElement confirmPassAux = driver.findElement(confirmPassword);
+        confirmPassAux.clear();
+        confirmPassAux.sendKeys(passwordIn);
+
+    }
+
+
+    public void sendForm() {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+        WebElement btn = driver.findElement(btnRegister);
+        btn.click();
+    }
 
 }
