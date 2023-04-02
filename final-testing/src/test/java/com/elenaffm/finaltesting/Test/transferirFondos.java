@@ -1,8 +1,8 @@
 package com.elenaffm.finaltesting.Test;
 
 import com.elenaffm.finaltesting.Base.BasePage;
-import com.elenaffm.finaltesting.Pages.OpenAccountPage;
 import com.elenaffm.finaltesting.Pages.LoginPage;
+import com.elenaffm.finaltesting.Pages.TransferPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,12 +13,14 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class abrirNuevaCuentaTest {
+public class transferirFondos {
+
 
     private WebDriver driver;
     BasePage basePage;
     LoginPage loginPage;
-    OpenAccountPage openAccountPage;
+
+    TransferPage transferPage;
 
     String username = "AnGomez452";
     String password = "passTest12350";
@@ -41,21 +43,19 @@ public class abrirNuevaCuentaTest {
         assertTrue(result.contains("Log Out"));
     }
 
-    @Test
-    public void crearNuevaCuenta() throws InterruptedException {
-        openAccountPage = new OpenAccountPage(driver);
-        openAccountPage.goToNewAccountPage();
-        openAccountPage.selectAccountType();
-        openAccountPage.sendFormNewAccount();
-        String result = openAccountPage.checkMsg();
-
-        assertTrue(result.contains("Congratulations, your account is now open."));
-    }
-
-
     @AfterAll
     public void tearDown() {
         driver.quit();
     }
 
+    @Test
+    public void transferirFondos() throws InterruptedException {
+        transferPage = new TransferPage(driver);
+
+        transferPage.goToNewAccountPage();
+        transferPage.completeForm();
+        transferPage.sendFormNewAccount();
+        String result = transferPage.checkMsg();
+        assertTrue(result.contains("Transfer Complete!"));
+    }
 }

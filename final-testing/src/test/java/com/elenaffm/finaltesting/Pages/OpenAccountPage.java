@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class LoggedPage {
+public class OpenAccountPage {
 
     WebDriver driver;
     WebDriverWait wait;
@@ -18,18 +18,18 @@ public class LoggedPage {
     By openNewAccountBtn = By.xpath("//*[@id=\"rightPanel\"]/div/div/form/div/input");
     By msgSuccess = By.xpath("//*[@id=\"rightPanel\"]/div/div/p[1]");
 
-    public LoggedPage(WebDriver driver) {
+
+
+    public OpenAccountPage(WebDriver driver) {
         this.driver = driver;
     }
 
     public void goToNewAccountPage() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
         WebElement newAccountLink = driver.findElement(this.newAccountLink);
         newAccountLink.click();
     }
 
-    public void selectAccountType() {
+    public void selectAccountType() throws InterruptedException {
         WebElement listOpt = driver.findElement(accountTypeInput);
         List<WebElement> options = listOpt.findElements(By.tagName("option"));
 
@@ -38,6 +38,13 @@ public class LoggedPage {
                 options.get(i).click();
             }
         }
+
+        Thread.sleep(1000);
+
+//        WebElement div = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div"));
+//        WebElement btn = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div/input"));
+//        div.click();
+//        btn.click();
     }
 
 
@@ -51,11 +58,7 @@ public class LoggedPage {
     }
 
     public void sendFormNewAccount() {
-
-        WebElement btn = driver.findElement(openNewAccountBtn);
-
-            btn.click();
-        }
+        WebElement btn = driver.findElement(this.openNewAccountBtn);
+        btn.click();
     }
-
 }

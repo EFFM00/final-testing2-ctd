@@ -3,8 +3,6 @@ package com.elenaffm.finaltesting.Test;
 import com.elenaffm.finaltesting.Base.BasePage;
 import com.elenaffm.finaltesting.Pages.LoginPage;
 import com.elenaffm.finaltesting.Pages.RegisterPage;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,7 +20,7 @@ public class registroTest {
 
     LoginPage loginPage;
 
-    String username = "AnGomez452";
+    String username = "AnGomez4352";
     String password = "passTest12350";
 
 
