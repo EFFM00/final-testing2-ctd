@@ -1,12 +1,14 @@
-package com.elenaffm.finaltesting;
+package com.elenaffm.finaltesting.Base;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class BasePage {
@@ -16,9 +18,8 @@ public class BasePage {
     private WebDriverWait wait;
 
 
-    public BasePage(WebDriver driver, WebDriverWait wait) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = wait;
     }
 
     public WebDriver chromeDriverConnection() {
@@ -67,5 +68,4 @@ public class BasePage {
     public void visit(String url) {
         driver.get(url);
     }
-
 }
