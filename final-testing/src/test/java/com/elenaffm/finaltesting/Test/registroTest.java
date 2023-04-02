@@ -1,9 +1,11 @@
 package com.elenaffm.finaltesting.Test;
 
 import com.elenaffm.finaltesting.Base.BasePage;
+import com.elenaffm.finaltesting.Pages.LoginPage;
 import com.elenaffm.finaltesting.Pages.RegisterPage;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -11,15 +13,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
-import java.time.Duration;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class registroTest {
 
     private WebDriver driver;
     BasePage basePage;
     RegisterPage registerPage;
+
+    LoginPage loginPage;
+
+    String username = "AnGomez452";
+    String password = "passTest12350";
+
 
     @BeforeAll
     public void setUp() {
@@ -30,7 +35,7 @@ public class registroTest {
         basePage.visit("https://parabank.parasoft.com/parabank/index.htm");
     }
 
-    @After
+    @AfterAll
     public void tearDown() {
         driver.quit();
     }
@@ -58,8 +63,8 @@ public class registroTest {
                 "1234",
                 "32435234",
                 "1",
-                "AnGomez9",
-                "passTest12350"
+                username,
+                password
         );
 
         registerPage.sendForm();
@@ -67,7 +72,4 @@ public class registroTest {
 
         assertTrue(result.contains("Your account was created successfully. You are now logged in."));
     }
-
-
-
 }
