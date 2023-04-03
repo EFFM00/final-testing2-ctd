@@ -24,9 +24,10 @@ public class OpenAccountPage {
         this.driver = driver;
     }
 
-    public void goToNewAccountPage() {
+    public void goToNewAccountPage() throws InterruptedException {
         WebElement newAccountLink = driver.findElement(this.newAccountLink);
         newAccountLink.click();
+        Thread.sleep(1500);
     }
 
     public void selectAccountType() throws InterruptedException {

@@ -2,7 +2,7 @@ package com.elenaffm.finaltesting.Test;
 
 import com.elenaffm.finaltesting.Base.BasePage;
 import com.elenaffm.finaltesting.Pages.LoginPage;
-import com.elenaffm.finaltesting.Pages.TransferPage;
+import com.elenaffm.finaltesting.Pages.OverviewPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,17 +13,16 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class transferirFondos {
-
+public class overviewTest {
 
     private WebDriver driver;
     BasePage basePage;
     LoginPage loginPage;
-
-    TransferPage transferPage;
+    OverviewPage overviewPage;
 
     String username = "AnGomez4352";
     String password = "passTest12350";
+
 
     @BeforeAll
     public void setUp() {
@@ -38,6 +37,7 @@ public class transferirFondos {
         loginPage.login(username, password);
         loginPage.sendForm();
 
+
         String result = loginPage.checkMsg(By.xpath("/html/body/div[1]/div[3]/div[1]/ul/li[8]/a"));
 
         assertTrue(result.contains("Log Out"));
@@ -49,13 +49,27 @@ public class transferirFondos {
     }
 
     @Test
-    public void transferirFondos() throws InterruptedException {
-        transferPage = new TransferPage(driver);
+    public void comprobarInformacionCuenta() throws InterruptedException {
+        overviewPage = new OverviewPage(driver);
 
-        transferPage.goToNewAccountPage();
-        transferPage.completeForm();
-        transferPage.sendFormNewAccount();
-        String result = transferPage.checkMsg();
-        assertTrue(result.contains("Transfer Complete!"));
+        overviewPage.goToOverviewAccount();
+        String textBalance = overviewPage.retornarTexto(overviewPage.getTextBalance());
+
+        assertTrue(textBalance.contains("*Balance includes deposits that may be subject to holds"));
+
     }
+
+    @Test
+    public void comprobarDetallesCuenta() throws InterruptedException {
+        overviewPage = new OverviewPage(driver);
+
+        overviewPage.goToOverviewAccount();
+        overviewPage.goToAccountDetails();
+
+        String textBalance = overviewPage.retornarTexto(overviewPage.getTextDetails());
+
+        assertTrue(textBalance.contains("Account Details"));
+
+    }
+
 }

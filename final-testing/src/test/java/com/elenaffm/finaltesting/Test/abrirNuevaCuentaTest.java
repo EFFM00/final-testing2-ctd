@@ -20,7 +20,7 @@ public class abrirNuevaCuentaTest {
     LoginPage loginPage;
     OpenAccountPage openAccountPage;
 
-    String username = "AnGomez452";
+    String username = "AnGomez4352";
     String password = "passTest12350";
 
     @BeforeAll
