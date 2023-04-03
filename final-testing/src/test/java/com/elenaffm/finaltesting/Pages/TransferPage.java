@@ -18,7 +18,7 @@ public class TransferPage {
     By amountInput = By.id("amount");
 
     By fromAccount = By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div[1]/select[2]/option[1]");
-    By toAccount = By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div[1]/select[2]/option[4]");
+    By toAccount = By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div[1]/select[2]/option[2]");
 
     By btnSend = By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div[2]/input");
 
