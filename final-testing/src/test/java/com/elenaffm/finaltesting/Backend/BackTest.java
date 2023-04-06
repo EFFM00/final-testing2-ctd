@@ -17,7 +17,7 @@ public class BackTest {
     String password = "passTest12350";
 
     @Test
-    public void Test01() {
+    public void RegistroURL() {
 
         String URL = "https://parabank.parasoft.com/parabank/register.htm";
 
@@ -28,12 +28,11 @@ public class BackTest {
 
 
     @Test
-    public void Test02() {
+    public void AbrirCuentaNueva() {
 
         Integer customerId = 12878;
         Integer newAccountType = 1;
         Integer fromAccountId = 13899;
-
 
         given().
             queryParam("customerId", customerId).
@@ -48,7 +47,7 @@ public class BackTest {
 
 
     @Test
-    public void Test03() {
+    public void ResumenCuentas() {
 
         String URL = "https://parabank.parasoft.com/parabank/overview.htm";
 
@@ -62,4 +61,34 @@ public class BackTest {
     }
 
 
+    @Test
+    public void TransferenciaFondos() {
+
+        Integer toAccountId = 12878;
+        Integer fromAccountId = 13899;
+        Integer amount = 1000000;
+
+        given().
+            queryParam("toAccountId", toAccountId).
+            queryParam("fromAccountId", fromAccountId).
+            queryParam("amount", amount).
+            auth().basic(username, password).
+        when().
+            post("https://parabank.parasoft.com/parabank/services_proxy/bank/transfer").
+        then().
+            statusCode(200).and().log().all();
+    }
+
+
+    @Test
+    public void ActividadMensualCuenta() {
+
+        Integer account = 13899;
+
+        given().
+        when().
+            post("https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/" + account + "/transactions/month/All/type/All").
+        then().
+            statusCode(200).and().log().all();
+    }
 }
