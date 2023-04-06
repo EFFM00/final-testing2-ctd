@@ -4,8 +4,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.elenaffm.finaltesting.Base.BasePage;
-import com.elenaffm.finaltesting.Pages.LoginPage;
 import com.elenaffm.finaltesting.Pages.RegisterPage;
 import com.elenaffm.finaltesting.reports.ExtentFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -23,9 +21,8 @@ public class registroTest {
 
     static ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
     static ExtentReports extent;
-    ExtentTest test;
 
-    BasePage basePage;
+    ExtentTest test;
     RegisterPage registerPage;
 
     String username = "AnGomez43522";
@@ -35,15 +32,15 @@ public class registroTest {
     @BeforeAll
     public void setUp() {
 
-        basePage = new BasePage(driver);
+        registerPage = new RegisterPage(driver);
 
-        driver = basePage.chromeDriverConnection();
+        driver = registerPage.chromeDriverConnection();
         extent = ExtentFactory.getInstance();
         extent.attachReporter(spark);
 
         test = extent.createTest("Apertura inicial de la página");
 
-        basePage.visit("https://parabank.parasoft.com/parabank/index.htm");
+        registerPage.visit("https://parabank.parasoft.com/parabank/index.htm");
         test.log(Status.INFO, "Acceder a la página");
     }
 
@@ -59,7 +56,6 @@ public class registroTest {
         test = extent.createTest("Abrir sección registro");
         test.log(Status.INFO, "Inicio del test");
 
-        registerPage = new RegisterPage(driver);
         registerPage.goToRegisterPage();
         test.log(Status.PASS, "Dirigirse a la sección de registro");
         String result = registerPage.checkMsg(By.xpath("//*[@id=\"rightPanel\"]/h1"));
@@ -74,7 +70,6 @@ public class registroTest {
 
         test = extent.createTest("Completando formulario registro");
 
-        registerPage = new RegisterPage(driver);
         registerPage.goToRegisterPage();
         registerPage.completeForm(
                 "Ana",

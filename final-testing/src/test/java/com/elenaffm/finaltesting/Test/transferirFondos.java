@@ -25,7 +25,6 @@ public class transferirFondos {
     static ExtentReports extent;
     ExtentTest test;
 
-    BasePage basePage;
     LoginPage loginPage;
 
     TransferPage transferPage;
@@ -36,16 +35,16 @@ public class transferirFondos {
     @BeforeAll
     public void setUp() {
 
-        basePage = new BasePage(driver);
+        transferPage = new TransferPage(driver);
 
-        driver = basePage.chromeDriverConnection();
+        driver = transferPage.chromeDriverConnection();
 
         extent = ExtentFactory.getInstance();
         extent.attachReporter(spark);
 
         test = extent.createTest("Login previo transferencia fondos");
 
-        basePage.visit("https://parabank.parasoft.com/parabank/index.htm");
+        transferPage.visit("https://parabank.parasoft.com/parabank/index.htm");
         loginPage = new LoginPage(driver);
 
         loginPage.login(username, password);
@@ -67,7 +66,6 @@ public class transferirFondos {
     public void transferirFondos() throws InterruptedException {
         test = extent.createTest("Inicio test transferencia de fondo");
 
-        transferPage = new TransferPage(driver);
         transferPage.goToNewAccountPage();
         test.log(Status.INFO, "Dirigirse a la sección de transferencias");
 

@@ -23,10 +23,11 @@ public class abrirNuevaCuentaTest {
     private WebDriver driver;
 
     static ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
+
     static ExtentReports extent;
 
     ExtentTest test;
-    BasePage basePage;
+
     LoginPage loginPage;
     OpenAccountPage openAccountPage;
 
@@ -36,10 +37,10 @@ public class abrirNuevaCuentaTest {
     @BeforeAll
     public void setUp() {
 
-        basePage = new BasePage(driver);
+        openAccountPage = new OpenAccountPage(driver);
 
-        driver = basePage.chromeDriverConnection();
-        basePage.visit("https://parabank.parasoft.com/parabank/index.htm");
+        driver = openAccountPage.chromeDriverConnection();
+        openAccountPage.visit("https://parabank.parasoft.com/parabank/index.htm");
 
         loginPage = new LoginPage(driver);
 
@@ -51,7 +52,7 @@ public class abrirNuevaCuentaTest {
 
         test = extent.createTest("Apertura inicial de la página");
 
-        basePage.visit("https://parabank.parasoft.com/parabank/index.htm");
+        openAccountPage.visit("https://parabank.parasoft.com/parabank/index.htm");
 
         String result = loginPage.checkMsg(By.xpath("/html/body/div[1]/div[3]/div[1]/ul/li[8]/a"));
         assertTrue(result.contains("Log Out"));

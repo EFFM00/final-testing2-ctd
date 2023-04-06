@@ -1,5 +1,6 @@
 package com.elenaffm.finaltesting.Pages;
 
+import com.elenaffm.finaltesting.Base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class TransferPage {
+public class TransferPage extends BasePage {
 
-
-    WebDriver driver;
     WebDriverWait wait;
     By linkTransfer = By.xpath("//*[@id=\"leftPanel\"]/ul/li[3]/a");
     By amountInput = By.id("amount");
@@ -26,21 +25,22 @@ public class TransferPage {
 
     //By contMsgSuccess = By.xpath("/html/body/div[1]/div[3]/div[2]/div/div");
 
+
     public TransferPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void goToNewAccountPage() throws InterruptedException {
-        WebElement newAccountLink = driver.findElement(this.linkTransfer);
+        WebElement newAccountLink = findElement(this.linkTransfer);
         newAccountLink.click();
         Thread.sleep(1000);
     }
 
     public String checkMsg() throws InterruptedException {
         Thread.sleep(2000);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(super.getDriver(), Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfElementLocated(msgSuccess));
-        WebElement msgResult = driver.findElement(msgSuccess);
+        WebElement msgResult = findElement(msgSuccess);
         String text = msgResult.getText();
 
 
@@ -50,18 +50,18 @@ public class TransferPage {
 
     public void completeForm(){
 
-        driver.findElement(amountInput).clear();
-        driver.findElement(amountInput).sendKeys("120000");
+        findElement(amountInput).clear();
+        findElement(amountInput).sendKeys("120000");
 
-        WebElement from = driver.findElement(fromAccount);
-        WebElement to = driver.findElement(toAccount);
+        WebElement from = findElement(fromAccount);
+        WebElement to = findElement(toAccount);
 
         from.click();
         to.click();
     }
 
     public void sendFormNewAccount() {
-        WebElement btn = driver.findElement(this.btnSend);
+        WebElement btn = findElement(this.btnSend);
         btn.click();
     }
 }

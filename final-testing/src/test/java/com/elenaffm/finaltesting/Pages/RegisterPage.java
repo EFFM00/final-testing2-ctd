@@ -9,9 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class RegisterPage {
+public class RegisterPage extends BasePage{
 
-    WebDriver driver;
     WebDriverWait wait;
 
     protected static By registerLink = By.xpath("//*[@id=\"loginPanel\"]/p[2]/a");
@@ -32,21 +31,22 @@ public class RegisterPage {
     protected static By btnRegister = By.xpath("//*[@id=\"customerForm\"]/table/tbody/tr[13]/td[2]/input");
 
     public RegisterPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public void goToRegisterPage() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
-        WebElement registryBtn = driver.findElement(registerLink);
+    public void goToRegisterPage() {
+        wait = new WebDriverWait(super.getDriver(), Duration.ofSeconds(3));
+
+        WebElement registryBtn = findElement(registerLink);
         registryBtn.click();
     }
 
 
     public String checkMsg(By locator) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(super.getDriver(), Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-        WebElement msgResult = driver.findElement(locator);
+        WebElement msgResult = findElement(locator);
         String text = msgResult.getText();
 
         return text;
@@ -66,47 +66,47 @@ public class RegisterPage {
             String passwordIn
     ) {
 
-        WebElement nameAux = driver.findElement(firstName);
+        WebElement nameAux = findElement(firstName);
         nameAux.clear();
         nameAux.sendKeys(firstNameIn);
 
-        WebElement lastnameAux = driver.findElement(lastName);
+        WebElement lastnameAux = findElement(lastName);
         lastnameAux.clear();
         lastnameAux.sendKeys(lastNameIn);
 
-        WebElement addressAux = driver.findElement(address);
+        WebElement addressAux = findElement(address);
         addressAux.clear();
         addressAux.sendKeys(addressIn);
 
-        WebElement cityAux = driver.findElement(city);
+        WebElement cityAux = findElement(city);
         cityAux.clear();
         cityAux.sendKeys(cityIn);
 
-        WebElement stateAux = driver.findElement(state);
+        WebElement stateAux = findElement(state);
         stateAux.clear();
         stateAux.sendKeys(stateIn);
 
-        WebElement zipCodeAux = driver.findElement(zipCode);
+        WebElement zipCodeAux = findElement(zipCode);
         zipCodeAux.clear();
         zipCodeAux.sendKeys(zipCodeIn);
 
-        WebElement phoneAux = driver.findElement(phone);
+        WebElement phoneAux = findElement(phone);
         phoneAux.clear();
         phoneAux.sendKeys(phoneIn);
 
-        WebElement ssnAux = driver.findElement(ssn);
+        WebElement ssnAux = findElement(ssn);
         ssnAux.clear();
         ssnAux.sendKeys(ssnIn);
 
-        WebElement usernameAux = driver.findElement(username);
+        WebElement usernameAux = findElement(username);
         usernameAux.clear();
         usernameAux.sendKeys(usernameIn);
 
-        WebElement passwordAux = driver.findElement(password);
+        WebElement passwordAux = findElement(password);
         passwordAux.clear();
         passwordAux.sendKeys(passwordIn);
 
-        WebElement confirmPassAux = driver.findElement(confirmPassword);
+        WebElement confirmPassAux = findElement(confirmPassword);
         confirmPassAux.clear();
         confirmPassAux.sendKeys(passwordIn);
 
@@ -114,9 +114,9 @@ public class RegisterPage {
 
 
     public void sendForm() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(super.getDriver(), Duration.ofSeconds(3));
 
-        WebElement btn = driver.findElement(btnRegister);
+        WebElement btn = super.getDriver().findElement(btnRegister);
         btn.click();
     }
 

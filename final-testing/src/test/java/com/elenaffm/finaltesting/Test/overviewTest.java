@@ -73,7 +73,7 @@ public class overviewTest {
 
         overviewPage.goToOverviewAccount();
         test.log(Status.PASS, "Acceder a la sección de información de las cuentas");
-        String textBalance = overviewPage.retornarTexto(overviewPage.getTextBalance());
+        String textBalance = overviewPage.returnText(overviewPage.getTextBalance());
 
         test.log(Status.PASS, "Sección incluye el mensaje buscado");
         assertTrue(textBalance.contains("*Balance includes deposits that may be subject to holds"));
@@ -91,7 +91,7 @@ public class overviewTest {
         overviewPage.goToAccountDetails();
         test.log(Status.PASS, "Acceder a la sección de detalles de las cuentas");
 
-        String textBalance = overviewPage.retornarTexto(overviewPage.getTextDetails());
+        String textBalance = overviewPage.returnText(overviewPage.getTextDetails());
 
         assertTrue(textBalance.contains("Account Details"));
         test.log(Status.PASS, "Sección incluye el mensaje buscado");

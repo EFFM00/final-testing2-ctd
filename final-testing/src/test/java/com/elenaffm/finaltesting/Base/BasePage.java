@@ -13,13 +13,16 @@ import java.util.List;
 
 public class BasePage {
 
+
     private WebDriver driver;
-
-    private WebDriverWait wait;
-
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+    }
+
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     public WebDriver chromeDriverConnection() {
@@ -28,7 +31,6 @@ public class BasePage {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.get("https://opencart.abstracta.us/index.php?route=common/home");
 
         return driver;
     }

@@ -1,5 +1,6 @@
 package com.elenaffm.finaltesting.Pages;
 
+import com.elenaffm.finaltesting.Base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class OpenAccountPage {
+public class OpenAccountPage extends BasePage {
 
-    WebDriver driver;
     WebDriverWait wait;
     By newAccountLink = By.xpath("/html/body/div[1]/div[3]/div[1]/ul/li[1]/a");
     By accountTypeInput = By.xpath("//*[@id=\"type\"]");
@@ -19,19 +19,18 @@ public class OpenAccountPage {
     By msgSuccess = By.xpath("//*[@id=\"rightPanel\"]/div/div/p[1]");
 
 
-
     public OpenAccountPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void goToNewAccountPage() throws InterruptedException {
-        WebElement newAccountLink = driver.findElement(this.newAccountLink);
+        WebElement newAccountLink = super.getDriver().findElement(this.newAccountLink);
         newAccountLink.click();
         Thread.sleep(1500);
     }
 
     public void selectAccountType() throws InterruptedException {
-        WebElement listOpt = driver.findElement(accountTypeInput);
+        WebElement listOpt = super.getDriver().findElement(accountTypeInput);
         List<WebElement> options = listOpt.findElements(By.tagName("option"));
 
         for(int i = 0; i < options.size(); i++) {
@@ -42,24 +41,20 @@ public class OpenAccountPage {
 
         Thread.sleep(1000);
 
-//        WebElement div = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div"));
-//        WebElement btn = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div/div/form/div/input"));
-//        div.click();
-//        btn.click();
     }
 
 
     public String checkMsg() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(super.getDriver(), Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfElementLocated(msgSuccess));
-        WebElement msgResult = driver.findElement(msgSuccess);
+        WebElement msgResult = super.getDriver().findElement(msgSuccess);
         String text = msgResult.getText();
 
         return text;
     }
 
     public void sendFormNewAccount() {
-        WebElement btn = driver.findElement(this.openNewAccountBtn);
+        WebElement btn = super.getDriver().findElement(this.openNewAccountBtn);
         btn.click();
     }
 }

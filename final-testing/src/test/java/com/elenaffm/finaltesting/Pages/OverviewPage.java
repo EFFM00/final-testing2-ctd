@@ -1,14 +1,11 @@
 package com.elenaffm.finaltesting.Pages;
 
+import com.elenaffm.finaltesting.Base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class OverviewPage {
-
-    WebDriver driver;
-    WebDriverWait wait;
+public class OverviewPage extends BasePage {
 
     By linkOverview = By.xpath("/html/body/div[1]/div[3]/div[1]/ul/li[2]/a");
 
@@ -18,23 +15,23 @@ public class OverviewPage {
     By textDetails = By.xpath("/html/body/div[1]/div[3]/div[2]/div/div[1]/h1");
 
     public OverviewPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void goToOverviewAccount() throws InterruptedException {
-        WebElement newAccountLink = driver.findElement(this.linkOverview);
+        WebElement newAccountLink = findElement(this.linkOverview);
         newAccountLink.click();
         Thread.sleep(1500);
     }
 
-    public String retornarTexto(By localizador) {
-        WebElement text = driver.findElement(localizador);
+    public String returnText(By localizador) {
+        WebElement text = findElement(localizador);
 
         return text.getText();
     }
 
     public void goToAccountDetails() throws InterruptedException {
-        WebElement newAccountLink = driver.findElement(this.columnAccount);
+        WebElement newAccountLink = findElement(this.columnAccount);
         newAccountLink.click();
         Thread.sleep(1500);
     }
